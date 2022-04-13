@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 
+
 const TaskContext = React.createContext({
   tasks: [],
   createTask: () => {},
@@ -8,7 +9,7 @@ const TaskContext = React.createContext({
   is_loading:false
 });
 
-const default_task = { id: 1, title: "make todo app", is_complete: true };
+const default_task = { id: 1, title: "make todo app","schedule_time":"2:30", is_complete: true };
 
 const TaskProvider = ({ children }) => {
   const [tasks, setTask] = useState([default_task]);

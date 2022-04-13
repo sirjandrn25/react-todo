@@ -5,7 +5,7 @@ import { UseTaskContext } from "../contexts/taskContext";
 const EditTask = (props) => {
   const handleClose = () => props.setShow(false);
   const handleShow = () => props.setShow(true);
-
+  
   return (
     <Modal show={props.show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -25,19 +25,21 @@ const EditTask = (props) => {
 
 const EditForm = (props) => {
   const [title, setTitle] = useState(props.task.title);
+  const [time,setTime] = useState(props.task.schedule_time);
   const [checked,setChecked] = useState(props.task.is_complete);
-    const {modifyTask} = UseTaskContext();
+  
+  const {modifyTask} = UseTaskContext();
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    modifyTask({...props.task,is_complete:checked,title:title});
+   
+    // modifyTask({...props.task,is_complete:checked,title:title});
     // console.log(task);
   };
   
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formTitle">
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -45,6 +47,19 @@ const EditForm = (props) => {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Enter Title"
         />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="FormScheduleTime">
+        <Form.Label >Schedule Time</Form.Label>
+        <Form.Control
+        type="time"
+        value={time}
+        min="09:00"
+        max="18:00"
+
+       
+        required
+        onChange={e=>setTime(e.target.value)}
+         />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicCheckbox">

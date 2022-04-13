@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 import TaskList from "./TaskList";
 import "../App.css";
-import { Card, Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import AddTask from "./AddTask";
 
 const Home = () => {
   return (
     
       
-        <Card style={{ width: '30rem' }}>
+        <Card style={{ width: '40rem' }}>
           <Card.Body>
             <div>
               <AddTask />

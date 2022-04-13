@@ -1,16 +1,24 @@
 import * as React from "react";
 import Home from "./components/Home";
-import { TaskProvider } from "./contexts/taskContext";
+
+import ApiCall from './components/ApiCall';
+import Loginform from "./components/Loginform";
+import RegisterForm from './components/RegisterForm';
+import { UseUserContext } from "./contexts/userContext";
+import Header from './components/Header';
+
 
 const App = () => {
+  const {is_loggedIn} = UseUserContext();
   return (
-    
+    <>
+    <Header />
     <div className="App-header">
-      
-      <TaskProvider>
-        <Home />
-      </TaskProvider>
+      {/* {is_loggedIn?<Home />:<Loginform/>} */}
+      <RegisterForm />
     </div>
+    </>
+    
   );
 };
 

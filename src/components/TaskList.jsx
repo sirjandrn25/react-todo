@@ -13,6 +13,11 @@ const TaskList = () => {
       <tr key={task.id}>
         <td>{index + 1}</td>
         <td>{task.title}</td>
+        <td>
+          {
+            get12HourTimeFormat(task.schedule_time)
+          }
+        </td>
         <td>{task.is_complete ? <FaCheck /> : "X"}</td>
 
         <td>
@@ -44,6 +49,7 @@ const TaskList = () => {
           <tr>
             <th>Sno</th>
             <th>Task</th>
+            <th>Schedule Time</th>
             <th>Complete</th>
             <th>Action</th>
           </tr>
@@ -62,25 +68,13 @@ const TaskList = () => {
   );
 };
 
+const get12HourTimeFormat = (time)=>{
+  const split_time = time.split(":");
+  let hour = parseInt(split_time[0]);
+  let minute = parseInt(split_time[1]);
+  return hour > 12?`${hour-12}:${minute} PM`:`${hour}:${minute} AM`
+}
+
 export default TaskList;
 
-// const Task = (props) => {
-//   const { task, index, removeTask } = props;
 
-//   return (
-//     <tr key={task.id}>
-//       <td>{index + 1}</td>
-//       <td>{task.title}</td>
-//       <td>{task.is_complete ? <FaCheck /> : "X"}</td>
-
-//       <td>
-//         <Button onClick={(e) => <EditTask show={true} />}>
-//           <FaEdit />
-//         </Button>
-//         <Button onClick={(e) => removeTask(task.id)}>
-//           <FaTrash />
-//         </Button>
-//       </td>
-//     </tr>
-//   );
-// };
