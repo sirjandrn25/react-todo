@@ -6,11 +6,14 @@ import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
 
 import EditTask from "../components/EditTask";
 const TaskList = () => {
-  const { tasks, deleteTask,is_loading,fetchTasks } = UseTaskContext();
+  const { tasks, deleteTask,is_loading} = UseTaskContext();
   const [show, setShow] = useState(false);
   const [currTask, setCurrTask] = useState({});
  
-  
+  const handleDelete = (id)=>{
+    deleteTask(id);
+  }
+
   const Task = (task, index) => {
     return (
       <tr key={task.id}>
@@ -36,7 +39,7 @@ const TaskList = () => {
           </span>
           <span className="ml-1">
             
-          <Button variant="danger" disabled={is_loading?true:false} onClick={(e) => deleteTask(task.id)}>
+          <Button variant="danger" disabled={is_loading?true:false} onClick={(e) => handleDelete(task.id)}>
             <FaTrash />
           </Button>
           </span>

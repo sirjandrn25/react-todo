@@ -7,6 +7,12 @@ import AddTask from "../components/AddTask";
 import { useNavigate } from "react-router-dom";
 import { UseUserContext } from "../contexts/userContext";
 import { UseTaskContext } from "../contexts/taskContext";
+import { render } from "react-dom";
+
+
+
+
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -43,9 +49,17 @@ const Home = () => {
     
   },[])
 
-  const bodyRender = ()=>{
-      return (
-        <Card.Body>
+
+  
+  return (
+    <CardBody />
+  )
+};
+
+const CardBody = ()=>{
+  return (
+    <Card style={{width:"40rem"}}>
+          <Card.Body>
             <div>
               <AddTask />
             </div>
@@ -53,16 +67,8 @@ const Home = () => {
               <TaskList />
             </div>
           </Card.Body>
-      )
-  }
-  return (
-    
-      
-        <Card style={{ width: '40rem' }}>
-          {is_loading?"<h2>Loading.................</h2>":bodyRender()}
-        </Card>
-      
-  );
-};
+  </Card>
+  )
+}
 
 export default Home;

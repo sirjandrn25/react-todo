@@ -27,12 +27,20 @@ const EditForm = (props) => {
   const [title, setTitle] = useState(props.task.title);
   const [time,setTime] = useState(props.task.schedule_time);
   const [checked,setChecked] = useState(props.task.is_complete);
+  const [success,setSuccess] = useState(false);
   
-  const {modifyTask} = UseTaskContext();
+  const {modifyTask,is_loading} = UseTaskContext();
   
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+    const response = modifyTask({title:title,schedule_time:time,is_complete:checked},props.task.id);
+    response.then(resp=>{
+      if(resp){
+        setSuccess(true)
+      }else{
+        setSuccess(false);
+      }
+    })
     // modifyTask({...props.task,is_complete:checked,title:title});
     // console.log(task);
   };
@@ -53,8 +61,7 @@ const EditForm = (props) => {
         <Form.Control
         type="time"
         value={time}
-        min="09:00"
-        max="18:00"
+        
 
        
         required
@@ -66,9 +73,10 @@ const EditForm = (props) => {
        
         <Form.Check type="checkbox" checked={checked} onChange={() => setChecked(!checked)} label="Complete" />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Save
+      <Button variant="primary" type="submit" disabled={is_loading}>
+        {is_loading?"loading.....":"save"}
       </Button>
+      {success?<p className="text-success">Successfully update the task</p>:null}
     </Form>
   );
 };
