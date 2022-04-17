@@ -1,31 +1,62 @@
 import React, { useState, useContext } from "react";
+import axios from 'axios';
 
 
 const TaskContext = React.createContext({
   tasks: [],
+  fetchTasks: ()=>{},
   createTask: () => {},
   modifyTask: () => {},
   deleteTask: () => {},
   is_loading:false
 });
 
+const url = "https://dj-react-todo2022.herokuapp.com/api/v1"
+
 const default_task = { id: 1, title: "make todo app","schedule_time":"2:30", is_complete: true };
 
 const TaskProvider = ({ children }) => {
-  const [tasks, setTask] = useState([default_task]);
+  const [tasks, setTasks] = useState([default_task]);
   const [is_loading,setLoading] = useState(false);
 
+  const get_config = ()=>{
+    let config = {
+      headers:{
+        Authorization:`Bearer ${window.localStorage.getItem('access')}`
+      }
+    }
+    return config
+  }
+  const fetchTasks = async ()=>{
+    setLoading(true);
+    
+    return await axios.get(`${url}/tasks/`,get_config()).then(resp=>{
+      console.log(resp.data)
+      const data = resp.data;
+      setTasks(data);
+      setLoading(false);
+      return true;
+    }).catch(error=>{
+      console.log(error)
+      setLoading(false);
+      return false
+    })
+
+    // const response = 
+  }
   const createTask = (task) => {
     setLoading(true)
-    const new_task = { ...task, id: Math.floor(Math.random() * 10000) };
     
+    let config = get_config();
     
-    setTimeout(()=>{
-      setTask((state) => {
-      return [new_task, ...state];
-        });
+    axios.post(`${url}/tasks/`,task,config).then(resp=>{
+      const data = resp.data
+      setTasks([data,...tasks]);
+      setLoading(false)
+    }).catch(error=>{
+      console.log(error.response.data)
       setLoading(false);
-    },1000);
+    });
     
   };
 
@@ -40,16 +71,16 @@ const TaskProvider = ({ children }) => {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, createTask, deleteTask,modifyTask,is_loading }}>
+    <TaskContext.Provider value={{ tasks, createTask, deleteTask,modifyTask,is_loading,fetchTasks }}>
       {children}
     </TaskContext.Provider>
   );
 };
 
 export function UseTaskContext() {
-  const { tasks, createTask, modifyTask,deleteTask,is_loading } = useContext(TaskContext);
+  const { tasks, createTask, modifyTask,deleteTask,is_loading ,fetchTasks} = useContext(TaskContext);
   
-  return { tasks, createTask, deleteTask, modifyTask,is_loading };
+  return { tasks, createTask, deleteTask, modifyTask,is_loading,fetchTasks };
 }
 
 export { TaskProvider };

@@ -5,13 +5,22 @@ import App from './App'
 import { UserProvider } from "./contexts/userContext";
 import { TaskProvider } from "./contexts/taskContext";
 
+import {
+  BrowserRouter,
+  
+} from "react-router-dom";
+
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <TaskProvider>
-        <App />
-      </TaskProvider>
-    </UserProvider>
+    <BrowserRouter>
+
+      <UserProvider>
+        <TaskProvider>
+          <App />
+        </TaskProvider>
+      </UserProvider>
+    </BrowserRouter>
+    
     
   </React.StrictMode>,
   document.getElementById('root')

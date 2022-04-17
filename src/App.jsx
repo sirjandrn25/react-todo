@@ -1,11 +1,12 @@
 import * as React from "react";
-import Home from "./components/Home";
+import Home from "./routes/Home";
 
 import ApiCall from './components/ApiCall';
-import Loginform from "./components/Loginform";
-import RegisterForm from './components/RegisterForm';
+import Loginform from "./routes/Loginform";
+import RegisterForm from './routes/RegisterForm';
 import { UseUserContext } from "./contexts/userContext";
 import Header from './components/Header';
+import {Routes,Route} from 'react-router-dom';
 
 
 const App = () => {
@@ -13,10 +14,22 @@ const App = () => {
   return (
     <>
     <Header />
-    <div className="App-header">
-      {/* {is_loggedIn?<Home />:<Loginform/>} */}
-      <RegisterForm />
-    </div>
+      <div className="App-header">
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/login" element={<Loginform />} />
+          <Route path="/register" element={<RegisterForm />} />
+
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Routes>
+      </div>
     </>
     
   );

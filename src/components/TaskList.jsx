@@ -1,13 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, {useState} from "react";
 import TaskContext, { UseTaskContext } from "../contexts/taskContext";
 import { Table, Button,Row,Col,Spinner } from "react-bootstrap";
 import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
 
+
 import EditTask from "../components/EditTask";
 const TaskList = () => {
-  const { tasks, deleteTask,is_loading } = UseTaskContext();
+  const { tasks, deleteTask,is_loading,fetchTasks } = UseTaskContext();
   const [show, setShow] = useState(false);
   const [currTask, setCurrTask] = useState({});
+ 
+  
   const Task = (task, index) => {
     return (
       <tr key={task.id}>
@@ -60,9 +63,7 @@ const TaskList = () => {
           })}
         </tbody>
       </Table>
-      {/* {tasks.map((task) => (
-        <p>{task.id}</p>
-      ))} */}
+    
       <EditTask show={show} setShow={setShow} currTask={currTask} />
     </React.Fragment>
   );
