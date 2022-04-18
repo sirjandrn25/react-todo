@@ -44,7 +44,7 @@ export const UserProvider =({children})=>{
             setLoading(false)
             return true
         }).catch(error=>{
-            console.log(error)
+            // console.log(error)
             setErrors([error.response.data])
             setLoading(false);
             return false
@@ -66,7 +66,7 @@ export const UserProvider =({children})=>{
             setLoading(false);
             return true
         }).catch(error=>{
-            console.log(error.response.data)
+            // console.log(error.response.data)
             setLoading(false)
             return false
         })

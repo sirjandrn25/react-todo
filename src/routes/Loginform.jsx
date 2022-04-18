@@ -10,7 +10,7 @@ const LoginForm = ()=>{
     const [password,setPassword] = React.useState("");
     
     useEffect(()=>{
-        console.log("clean up function")
+        // console.log("clean up function")
         if(window.localStorage.getItem('access')){
             navigate('/')
         }
@@ -25,7 +25,9 @@ const LoginForm = ()=>{
         
         const response = handleLogin(user_data);
         response.then(resp=>{
-            console.log(resp)
+            // console.log(resp)
+
+            
             if(resp){
                 navigate('/')
             }

@@ -28,7 +28,7 @@ const RegisterForm = ()=>{
 
         const response = createUser(user_data);
         response.then(res=>{
-            console.log(res)
+            // console.log(res)
             if(res){
                 setSuccess(true);
                 setEmail('');
