@@ -20,32 +20,7 @@ const Home = () => {
   const {fetchTasks} = UseTaskContext();
 
   useEffect(()=>{
-    if (window.localStorage.getItem('access')){
-        fetchTasks().then(resp=>{
-          console.log(resp)
-          if(!resp){
-            access_token().then(resp=>{
-              if(!resp){
-                handleLogout();
-                navigate("/login");
-              }
-              else{
-                fetchTasks().then(resp=>{
-                  if(!resp){
-                    handleLogout();
-                    navigate("/login");
-                  }
-                })
-              }
-            })
-          }
-        }).catch(error=>{
-          console.log(resp);
-        })
-    }else{
-        handleLogout();
-        navigate('/login');
-    }
+    fetchTasks();
     
   },[])
 

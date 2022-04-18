@@ -9,7 +9,7 @@ const TaskContext = React.createContext({
   modifyTask: () => {},
   deleteTask: () => {},
   is_loading:false,
-  errors:{},
+  errors:[],
 });
 
 const url = "https://dj-react-todo2022.herokuapp.com/api/v1"
@@ -85,11 +85,12 @@ const TaskProvider = ({ children }) => {
     const config = get_config();
     return await axios.put(`${url}/tasks/${id}/`,update_task,config).then(resp=>{
       const data = resp.data
-      setTasks(tasks.map(task=>task.id!=data.id?task:update_task));
+      // console.log(data)
+      setTasks(tasks.map(task=>task.id!=data.id?task:data));
       setLoading(false);
       return true
     }).catch(error=>{
-      console.log(error);
+      // console.log(error);
       setLoading(false);
       return false;
     })

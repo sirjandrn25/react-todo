@@ -5,9 +5,9 @@ import { InputGroup,Spinner } from "react-bootstrap";
 
 
 const AddTask = () => {
-  const { createTask,is_loading,errors } = UseTaskContext();
+  const { createTask,is_loading,errors,access_token } = UseTaskContext();
   const [text, setText] = React.useState("");
-  const [time,setTime] = React.useState("");
+  const [time,setTime] = React.useState(getCurrentTime());
   const [success,setSuccess] = React.useState(false);
 
   const handleSubmit = (e) => {
@@ -23,6 +23,7 @@ const AddTask = () => {
         setSuccess(true)
       }else{
         setSuccess(false);
+
       }
     })
     
@@ -74,10 +75,10 @@ const AddTask = () => {
 
 
 const getCurrentTime = ()=>{
-  console.log("current time calling")
-  
-  console.log(curr_time)
-  return curr_time
+  const d = new Date();
+  let hours = d.getHours()<10?'0'+d.getHours().toString():d.getHours();
+  const minutes = d.getMinutes()<10?'0'+d.getMinutes().toString():d.getMinutes();
+  return `${hours}:${minutes}:00`;
 
 
 }

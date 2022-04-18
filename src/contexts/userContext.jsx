@@ -24,6 +24,13 @@ export const UserProvider =({children})=>{
     const [errors,setErrors] = React.useState({});
     const [is_loading,setLoading] = React.useState(false);
     
+
+    const handleUserDetail = ()=>{
+        let user_data = window.localStorage.getItem('user');
+        user_data = JSON.parse(user_data);
+        setUser(user_data);
+
+    }
     const handleLogin = async (user_data)=>{
         setLoading(true);
         const response = await axios.post(`${url}/user_login/`,user_data).then(json_res=>{
@@ -33,7 +40,7 @@ export const UserProvider =({children})=>{
             window.localStorage.setItem('access',data.access)
             window.localStorage.setItem('user',JSON.stringify(data.user));
             setLoggedIn(true);
-
+            handleUserDetail();
             setLoading(false)
         }).catch(error=>{
             
@@ -50,6 +57,9 @@ export const UserProvider =({children})=>{
         return await axios.post(`${url}/refresh_token/`,config_data).then(resp=>{
             const data = resp.data
             window.localStorage.setItem("access",data.access)
+            
+            setLoggedIn(true);
+            handleUserDetail();
             setLoading(false);
             return true
         }).catch(error=>{

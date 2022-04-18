@@ -9,6 +9,7 @@ const TaskList = () => {
   const { tasks, deleteTask,is_loading} = UseTaskContext();
   const [show, setShow] = useState(false);
   const [currTask, setCurrTask] = useState({});
+
  
   const handleDelete = (id)=>{
     deleteTask(id);
@@ -33,13 +34,13 @@ const TaskList = () => {
               setCurrTask(task);
               setShow(true);
             }}
-          >
+           disabled={is_loading}>
             <FaEdit />
           </Button>
           </span>
           <span className="ml-1">
             
-          <Button variant="danger" disabled={is_loading?true:false} onClick={(e) => handleDelete(task.id)}>
+          <Button variant="danger" disabled={is_loading}  onClick={(e) => handleDelete(task.id)}>
             <FaTrash />
           </Button>
           </span>
