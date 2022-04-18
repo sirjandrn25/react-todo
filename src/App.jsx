@@ -10,7 +10,7 @@ import {Routes,Route} from 'react-router-dom';
 
 
 const App = () => {
-  const {is_loggedIn} = UseUserContext();
+
   return (
     <>
     <Header />

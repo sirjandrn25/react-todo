@@ -20,9 +20,10 @@ const Home = () => {
   const {fetchTasks} = UseTaskContext();
 
   useEffect(()=>{
-    fetchTasks();
-    
-  },[])
+    if(!is_loggedIn && !is_loading){
+      navigate('/login')
+    }
+  },[is_loggedIn])
 
 
   

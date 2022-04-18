@@ -10,10 +10,11 @@ const LoginForm = ()=>{
     const [password,setPassword] = React.useState("");
     
     useEffect(()=>{
-        if(is_loggedIn){
-            return navigate("/");
+        console.log("clean up function")
+        if(window.localStorage.getItem('access')){
+            navigate('/')
         }
-    },[is_loggedIn])
+    },[])
     const handleSubmit = (e)=>{
         e.preventDefault();
         
@@ -22,7 +23,13 @@ const LoginForm = ()=>{
             password:password
         }
         
-        handleLogin(user_data);
+        const response = handleLogin(user_data);
+        response.then(resp=>{
+            console.log(resp)
+            if(resp){
+                navigate('/')
+            }
+        })
     
 
     }

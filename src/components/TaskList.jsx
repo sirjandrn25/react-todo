@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import TaskContext, { UseTaskContext } from "../contexts/taskContext";
 import { Table, Button,Row,Col,Spinner } from "react-bootstrap";
 import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
@@ -6,10 +6,12 @@ import { FaEdit, FaCheck, FaTrash } from "react-icons/fa";
 
 import EditTask from "../components/EditTask";
 const TaskList = () => {
-  const { tasks, deleteTask,is_loading} = UseTaskContext();
+  const { tasks, deleteTask,is_loading,fetchTasks} = UseTaskContext();
   const [show, setShow] = useState(false);
   const [currTask, setCurrTask] = useState({});
-
+  useEffect(()=>{
+    fetchTasks();
+  },[])
  
   const handleDelete = (id)=>{
     deleteTask(id);

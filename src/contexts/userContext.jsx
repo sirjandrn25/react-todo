@@ -42,11 +42,14 @@ export const UserProvider =({children})=>{
             setLoggedIn(true);
             handleUserDetail();
             setLoading(false)
+            return true
         }).catch(error=>{
-            
-            setErrors(error.response.data)
+            console.log(error)
+            setErrors([error.response.data])
             setLoading(false);
+            return false
         })
+        return response
     }
     const access_token = async()=>{
         setLoading(true);
@@ -63,7 +66,7 @@ export const UserProvider =({children})=>{
             setLoading(false);
             return true
         }).catch(error=>{
-            console.log(error)
+            console.log(error.response.data)
             setLoading(false)
             return false
         })
