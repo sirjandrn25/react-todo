@@ -6,8 +6,6 @@ import { Card } from "react-bootstrap";
 import AddTask from "../components/AddTask";
 import { useNavigate } from "react-router-dom";
 import { UseUserContext } from "../contexts/userContext";
-import { UseTaskContext } from "../contexts/taskContext";
-import { render } from "react-dom";
 
 
 
@@ -15,22 +13,24 @@ import { render } from "react-dom";
 
 
 const Home = () => {
-  const navigate = useNavigate();
-  const {is_loggedIn,handleLogout,access_token,is_loading} = UseUserContext();
-  const {fetchTasks} = UseTaskContext();
-
-  useEffect(()=>{
-    if(!is_loggedIn && !is_loading){
-      navigate('/login')
-    }
-  },[is_loggedIn])
-
-
+  const {is_loading} = UseUserContext();
   
   return (
-    <CardBody />
+    <div className="home">
+      {is_loading?<Loading />:<CardBody />}
+    
+    </div>
+    
+    
   )
 };
+
+
+const Loading = ()=>{
+  return (
+    <h1 className="text-primary">loading .....</h1>
+  )
+}
 
 const CardBody = ()=>{
   return (

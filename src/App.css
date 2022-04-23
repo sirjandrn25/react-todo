@@ -13,17 +13,18 @@
   }
 }
 
-.App-header {
+.app_container {
   /* background-color: #282c34; */
-  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-  
   background-image: linear-gradient(#006666,#660066);
 }
+
 
 .App-link {
   color: #61dafb;

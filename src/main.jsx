@@ -7,16 +7,29 @@ import { TaskProvider } from "./contexts/taskContext";
 
 import {
   BrowserRouter,
+  Routes,
+  Route
   
 } from "react-router-dom";
-
+import Loginform from "./routes/Loginform";
+import RegisterForm from './routes/RegisterForm';
+import Home from "./routes/Home";
+import Layout from "./components/Layout";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
 
       <UserProvider>
         <TaskProvider>
-          <App />
+          <Routes>
+            <Route path="/" element={<App />} >
+              <Route index element={<Layout />} />
+              <Route path="/home" element={<Home/>} />
+              <Route path="/login" element={<Loginform/>} />
+              <Route path="/register" element={<RegisterForm />} />
+            </Route>
+          </Routes>
+          
         </TaskProvider>
       </UserProvider>
     </BrowserRouter>

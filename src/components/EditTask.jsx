@@ -41,8 +41,7 @@ const EditForm = (props) => {
         setSuccess(false);
       }
     })
-    // modifyTask({...props.task,is_complete:checked,title:title});
-    // console.log(task);
+    
   };
   
   return (

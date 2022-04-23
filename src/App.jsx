@@ -1,36 +1,25 @@
 import * as React from "react";
 import Home from "./routes/Home";
 
-import ApiCall from './components/ApiCall';
+
 import Loginform from "./routes/Loginform";
 import RegisterForm from './routes/RegisterForm';
-import { UseUserContext } from "./contexts/userContext";
-import Header from './components/Header';
-import {Routes,Route} from 'react-router-dom';
 
+import Header from './components/Header';
+import {Outlet} from 'react-router-dom';
+import RequireAuth from "./components/RequireAuth";
+import Layout from "./components/Layout";
 
 const App = () => {
 
   return (
-    <>
-    <Header />
-      <div className="App-header">
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Loginform />} />
-          <Route path="/register" element={<RegisterForm />} />
+    
+    <div className="app_container">
+      <Header />
+      <Outlet />
 
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
-      </div>
-    </>
+    </div>
+    
     
   );
 };
