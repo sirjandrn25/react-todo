@@ -2,6 +2,7 @@ import {Card,Form,Button,Row,Col} from 'react-bootstrap'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UseUserContext } from "../contexts/userContext";
+import { Link } from 'react-router-dom';
 
 const Account = ()=>{
     const navigate = useNavigate();
@@ -20,8 +21,11 @@ const Account = ()=>{
     return (
         <div className="account_container">
             <Card style={{width:"40rem",padding:"10px"}}>
+                <Link to="/home" >
+                    back home
+                </Link>
                 <Card.Body>
-                    <Card.Title>User Account Settings</Card.Title>
+                    <Card.Title>  User Account Settings</Card.Title>
                     <hr />
                     {is_loading?"loading ......":<UpdateAccountForm />}
                     
