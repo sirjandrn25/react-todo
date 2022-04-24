@@ -45,7 +45,8 @@ export const UserProvider =({children})=>{
             return true
         }).catch(error=>{
             // console.log(error)
-            setErrors([error.response.data])
+            console.log(error.response.data)
+            setErrors(error.response.data)
             setLoading(false);
             return false
         })
@@ -107,7 +108,7 @@ export const UserProvider =({children})=>{
 
 export const UseUserContext = ()=>{
     const {user,is_loggedIn,handleLogin,handleLogout,createUser,errors,is_loading,access_token} = React.useContext(UserContext);
-
+    
     return {user,is_loggedIn,handleLogin,handleLogout,createUser,errors,is_loading,access_token};
 }
 

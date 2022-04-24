@@ -12,7 +12,7 @@ const LoginForm = ()=>{
     useEffect(()=>{
         // console.log("clean up function")
         if(window.localStorage.getItem('access')){
-            navigate('/')
+            navigate('/home')
         }
     },[])
     const handleSubmit = (e)=>{
@@ -29,7 +29,7 @@ const LoginForm = ()=>{
 
             
             if(resp){
-                navigate('/')
+                navigate('/home')
             }
         })
     

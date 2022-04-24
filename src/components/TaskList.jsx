@@ -21,7 +21,7 @@ const TaskList = () => {
     return (
       <tr key={task.id}>
         <td>{index + 1}</td>
-        <td>{task.title}</td>
+        <td>{task.is_complete?<del>{task.title}</del>:task.title}</td>
         <td>
           {
             get12HourTimeFormat(task.schedule_time)

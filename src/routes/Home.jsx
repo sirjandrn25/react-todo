@@ -13,8 +13,16 @@ import { UseUserContext } from "../contexts/userContext";
 
 
 const Home = () => {
-  const {is_loading} = UseUserContext();
-  
+  const {is_loading,access_token} = UseUserContext();
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const response = access_token();
+    response.then(resp=>{
+      if(!resp){
+        navigate('/login')
+      }
+    })
+  },[])
   return (
     <div className="home">
       {is_loading?<Loading />:<CardBody />}
