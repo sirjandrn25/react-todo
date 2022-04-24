@@ -15,6 +15,7 @@ import Loginform from "./routes/Loginform";
 import RegisterForm from './routes/RegisterForm';
 import Home from "./routes/Home";
 import Layout from "./components/Layout";
+import Account from './routes/Account';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -25,6 +26,7 @@ ReactDOM.render(
             <Route path="/" element={<App />} >
               <Route index element={<Layout />} />
               <Route path="/home" element={<Home/>} />
+              <Route path="/account" element={<Account />} />
               <Route path="/login" element={<Loginform/>} />
               <Route path="/register" element={<RegisterForm />} />
             </Route>

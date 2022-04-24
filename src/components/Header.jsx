@@ -18,7 +18,7 @@ const Header = () => {
   const UserDetail = () => {
     return <>
       <Navbar.Text style={{ "color": "#f5f5f0" }} className="mr-2">
-        {user.fullname}
+        <Link to="/account" className='text-white' >{user.fullname}</Link>
       </Navbar.Text>
       <Button size="sm" variant='outline-warning' onClick={userLogout} >Logout</Button>
 
