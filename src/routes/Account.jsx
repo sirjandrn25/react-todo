@@ -1,8 +1,42 @@
 import {Card,Form,Button,Row,Col} from 'react-bootstrap'
-
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UseUserContext } from "../contexts/userContext";
 
 const Account = ()=>{
+    const navigate = useNavigate();
+    const {is_loading,access_token} = UseUserContext();
+    useEffect(()=>{
+        const respone = access_token();
+        respone.then(resp=>{
+          if(!resp){
+            navigate("/login")
+          }
+        })
+      },[])
+   
 
+    
+    return (
+        <div className="account_container">
+            <Card style={{width:"40rem",padding:"10px"}}>
+                <Card.Body>
+                    <Card.Title>User Account Settings</Card.Title>
+                    <hr />
+                    {is_loading?"loading ......":<UpdateAccountForm />}
+                    
+                </Card.Body>
+            </Card>
+        </div>
+    )
+}
+
+
+const UpdateAccountForm = ()=>{
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+
+    }
     const renderError = (error)=>{
         return (
             <Form.Text className="text-danger">
@@ -10,18 +44,8 @@ const Account = ()=>{
             </Form.Text>
         )
     }
-
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-
-    }
     return (
-        <div className="account_container">
-            <Card style={{width:"40rem",padding:"10px"}}>
-                <Card.Body>
-                    <Card.Title>User Account Settings</Card.Title>
-                    <hr />
-                    <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
                         <Row>
                             <Col>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -60,12 +84,7 @@ const Account = ()=>{
                             Save
                         </Button>
                     </Form>
-                    
-                </Card.Body>
-            </Card>
-        </div>
     )
 }
-
 
 export default Account;

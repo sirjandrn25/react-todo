@@ -16,6 +16,8 @@ import RegisterForm from './routes/RegisterForm';
 import Home from "./routes/Home";
 import Layout from "./components/Layout";
 import Account from './routes/Account';
+import RequireAuth from "./components/RequireAuth";
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -25,8 +27,8 @@ ReactDOM.render(
           <Routes>
             <Route path="/" element={<App />} >
               <Route index element={<Layout />} />
-              <Route path="/home" element={<Home/>} />
-              <Route path="/account" element={<Account />} />
+              <Route path="/home" element={<RequireAuth><Home/></RequireAuth> } />
+              <Route path="/account" element={<RequireAuth><Account /></RequireAuth> } />
               <Route path="/login" element={<Loginform/>} />
               <Route path="/register" element={<RegisterForm />} />
             </Route>
